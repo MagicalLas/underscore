@@ -1,0 +1,2 @@
+# underscore
+Scala like lambda
