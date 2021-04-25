@@ -45,3 +45,21 @@ def test_underscore_with_type_3():
     f = _[str].lower()
 
     assert f("ABC") == "abc"
+
+
+def test_underscore_with_type_4():
+    f = _[str].split(" ")
+
+    assert f("A B C") == ["A", "B", "C"]
+
+
+def test_underscore_with_type_5():
+    f = _[str].lower().split(" ")
+
+    assert f("A B C") == ["a", "b", "c"]
+
+
+def test_underscore_with_type_6():
+    f = _[str].split(" ")[0]
+
+    assert f("A B C") == "A"
