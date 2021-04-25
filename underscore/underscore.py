@@ -34,9 +34,9 @@ class Lambda(Generic[T]):
 
 
 class Underscore:
-    def __init__(self):
-        self._is_use_lambda = False
-        self._lambda: Lambda[T]
+    def __init__(self, _is_use_lambda: bool = False, _lambda=None):
+        self._is_use_lambda = _is_use_lambda
+        self._lambda: Lambda[T] = _lambda
 
     def __call__(self, value: T):
         if self._is_use_lambda:
@@ -46,10 +46,8 @@ class Underscore:
     def __getitem__(self, _type: T) -> T:
         if self._is_use_lambda:
             self._lambda.get_item(_type)
-            return self
-        self._is_use_lambda = True
-        self._lambda = Lambda[T](_type)
-        return self
+            return Underscore(True, self._lambda)
+        return Underscore(True, Lambda[T](_type))
 
     def __add__(self, number):
         def wrapper(value):
@@ -61,7 +59,7 @@ class Underscore:
         if self._is_use_lambda and self._lambda.is_method_call(attr_name):
             def wrapper_for_method(*args, **kwargs):
                 self._lambda.method_call(attr_name, args, kwargs)
-                return self
+                return Underscore(self._is_use_lambda, self._lambda)
 
             return wrapper_for_method
 
