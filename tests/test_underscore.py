@@ -1,3 +1,6 @@
+from typing import Callable
+
+from underscore.f import F
 from underscore.underscore import _
 
 
@@ -63,3 +66,18 @@ def test_underscore_with_type_6():
     f = _[str].split(" ")[0]
 
     assert f("A B C") == "A"
+
+
+def test_underscore_with_type_8():
+    f = print(_)
+
+    f("\n\nLasWonho\n\n")
+
+
+def test_underscore_with_type_9():
+    def add(a: int) -> int:
+        return 12
+
+    f: Callable[[int], int] = add(_)
+
+    assert f(2) == 12
