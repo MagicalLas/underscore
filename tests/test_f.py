@@ -24,4 +24,3 @@ def test_F_print():
     f = F(print)(_)
 
     f("LasWonho")
-
