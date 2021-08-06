@@ -9,7 +9,6 @@ class PrintASTTransformer(PytestTransformer):
     }
     allow_inheritance_ctx = True
 
-
     def visit_Name(self, node):
         if node.id == "print" or node.id == "add":
             return fix_missing_locations(Call(
